@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>binoReconstructionClass</class>
+ <widget class="QMainWindow" name="binoReconstructionClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1384</width>
+    <height>896</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>binoReconstruction</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QVTKWidget" name="qvtkWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>1361</width>
+      <height>861</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1384</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuReadCalibratePara">
+    <property name="title">
+     <string>双目重建</string>
+    </property>
+    <addaction name="ReadCalibrationParameters"/>
+    <addaction name="binoRestruction"/>
+   </widget>
+   <widget class="QMenu" name="menuRGBD">
+    <property name="title">
+     <string>RGBD重建</string>
+    </property>
+    <addaction name="Rgbdreconstruction"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>读取点云</string>
+    </property>
+    <addaction name="ReadPointCloud"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menuReadCalibratePara"/>
+   <addaction name="menuRGBD"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="ReadCalibrationParameters">
+   <property name="text">
+    <string>ReadCaliPara</string>
+   </property>
+  </action>
+  <action name="binoRestruction">
+   <property name="text">
+    <string>binoRestruction</string>
+   </property>
+  </action>
+  <action name="singleRrestruction">
+   <property name="text">
+    <string>singleRrestruction</string>
+   </property>
+  </action>
+  <action name="Rgbdreconstruction">
+   <property name="text">
+    <string>Rgbdreconstruction</string>
+   </property>
+  </action>
+  <action name="ReadPointCloud">
+   <property name="text">
+    <string>ReadpointCloud</string>
+   </property>
+  </action>
+  <action name="SavePointCloud">
+   <property name="text">
+    <string>SavePointCloud</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QVTKWidget</class>
+   <extends>QWidget</extends>
+   <header>QVTKWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="binoreconstruction.qrc"/>
+ </resources>
+ <connections/>
+</ui>
