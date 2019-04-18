@@ -1,0 +1,9 @@
+工程中应该包括：参考文献、算法详细实现流程、工程源码、附加依赖库、数据库、CMakeLists.txt、ReadMe.md
+
+算法详细实现流程需单独建立一个word或pdf文档分模块进行详细说明
+
+工程源码中，每个源文件应该对应一个头文件
+
+CMakeLists.txt的写法可以参照“CMakeLists.txt”
+
+ReadMe.md的写法可以参照“说明文档规范”

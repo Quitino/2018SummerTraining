@@ -1,0 +1,53 @@
+不用以root权限来运行：
+#sudo apt-get update
+#sudo apt-get install -y google-mock libboost-all-dev  libeigen3-dev libgflags-dev libgoogle-glog-dev liblua5.2-dev libprotobuf-dev  libsuitesparse-dev libwebp-dev ninja-build protobuf-compiler python-sphinx  ros-indigo-tf2-eigen libatlas-base-dev libsuitesparse-dev liblapack-dev
+#sudo apt-get install ros-indigo-gmapping
+#sudo apt-get install -y python-wstool python-rosdep ninja-build
+# mkdir catkin_google_ws
+# cd catkin_google_ws
+# wstool init src
+#wstool merge -t src https://raw.githubusercontent.com/googlecartographer/cartographer_ros/master/cartographer_ros.rosinstall   //链接仓库
+#wstool update -t src         //下载
+#rosdep update
+	===================================================================
+	rosdep update出错：error loading sources list:the read operation timed out
+	网上很多说是网络问题，让重试几次rosdep update，然鹅……没用 ，换了一个WiFi，也没用……
+	后来，开了手机4G网的热点来用，然后，竟然成功了！说到底，还是网络问题……
+	===================================================================
+	解决rosdep update问题：https://blog.csdn.net/qq_35237993/article/details/79814064
+	$sudo rm/etc/ros/rosdep/sources.list.d/20-default.list
+	$sudo apt-get update
+	$ sudo rosdep init
+	$rosdep update
+	&&&完整输出：
+	Adddistro "groovy"
+	Adddistro "hydro"
+	Adddistro "indigo"
+	Adddistro "jade"
+	Adddistro "kinetic"
+	Adddistro "lunar"
+	Adddistro "melodic"
+	updatedcache in /home/lxd/.ros/rosdep/sources.cache
+	这种方法还没试过，确实是网络问题，我重复尝试了好几次后成功执行了。
+	===================================================================
+	Warning: running 'rosdep update' as root is not recommended.
+	You should run 'sudo rosdep fix-permissions' and invoke 'rosdep update' again without sudo.
+	===================================================================
+	安装protobuf:https://blog.csdn.net/xiexievv/article/details/47396725
+	下载可以直接去网址下载×.zip包直接放到home下解压然后$./autogen.sh $./configure  $make  $make check 		$make install(这句需要root权限运行)
+	检验protobuf是否安装成功：https://blog.csdn.net/lwplwf/article/details/76532804
+	===================================================================
+	（ctrl+h）垃圾存放路径：fb@fb:~/.local/share/Trash$
+	===================================================================
+#rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y
+#catkin_make_isolated --install --use-ninja
+#source install_isolated/setup.bash
+	===================================================================
+	catkin_make错误：By not providing "FindEigen3.cmake" in CMAKE_MODULE_PATH 
+	https://github.com/jolibrain/deepdetect/issues/75
+	$ export Eigen3_DIR="/usr/local/include/eigen3:$Eigen3_DIR"
+××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+启动2D slam demo演示：https://google-cartographer-ros.readthedocs.io/en/latest/
+
+#wegt -p ~/Downloads https://storage.googleapis.com/cartographer-public-data/bags/backpack_2d/cartographer_paper_deutsches_museum.bag
+#roslaunch cartographer_ros demo_backpack_2d.launch bag_filename:=~/Downloads/cartographer_paper_deutsches_museum.bag

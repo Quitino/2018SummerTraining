@@ -1,0 +1,30 @@
+sudo  apt_get install ros-indigo-rplidar-ros
+
+
+
+
+rosrun rplidar_ros rplidarNode
+list
+sudo passwd --add fb dialout
+
+
+
+Error: cannot bind specified port /dev/ttyUSB0
+这个问题我做了三件事：$ sudo chmod 666 /dev/ttyUSB0   
+ 1运行这条指令后，再运行启动雷达指令即可，但是重新插拔激光后，还是不能用；
+$ sudo gpasswd --add ${USER} dialout 
+   1运行这条后并没有变化；
+$ cd /etc/udev/rules.d/ 
+$ sudo touch 50-usb-serial.rules  
+$ sudo gedit 50-usb-serial.rules   
+并在相应文件中加入KERNEL=="ttyUSB0", GROUP="username", MODE="0666"    
+1然后再运行：
+$ sudo /etc/init.d/udev restart     1仍然没有效果，最终重启了，然后可以正常使用了。
+总结下来，感觉就是启动串口的权限不够，如果在root权限下启动，是可以正常运行使用的。
+
+
+
+
+echo/scan
+
+
