@@ -1,0 +1,39 @@
+两套系统兼容代码
+#if defined(WIN32) || defined(_WIN32)
+	IPSG::CSerialPort SerialPort;
+	SerialPort.InitPort(3);
+#else 
+	int nFileDescriptor = 0;
+	nFileDescriptor = SerialInit();
+#endif
+
+
+
+
+日志
+
+
+bool IPSG::CCircleDetect::ScreenLog(cv::Mat DrawImage, std::string strDrawText)
+{
+	FILE_LOG(logDEBUG) << "CCircleDetect::ScreenLog() call";
+	int nFont = cv::FONT_HERSHEY_SIMPLEX;
+	float fFontScale = 0.5;
+	int nThickness = 1;
+	int nBaseline;
+
+	cv::Size TextSize = cv::getTextSize(strDrawText, nFont, fFontScale, nThickness, &nBaseline);
+
+	cv::Point Text_bl = cv::Point(0, TextSize.height);
+	cv::Point Rect_bl = Text_bl;
+	Rect_bl.y += nBaseline;
+
+	cv::Point Rect_tr = Rect_bl;
+	Rect_tr.x += TextSize.width;
+	Rect_tr.y -= TextSize.height + nBaseline;
+
+	cv::rectangle(DrawImage, Rect_bl, Rect_tr, cv::Scalar(0, 0, 0), -1);
+	cv::putText(DrawImage, strDrawText, Text_bl, nFont, fFontScale, cv::Scalar(255, 255, 255));
+
+	FILE_LOG(logDEBUG) << "CCircleDetect::ScreenLog() return";
+	return true;
+}
